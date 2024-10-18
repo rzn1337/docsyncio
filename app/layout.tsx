@@ -4,39 +4,40 @@ import "./globals.css";
 import { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import Provider from "./Provider";
 
 const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+    subsets: ["latin"],
+    variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  title: "docsyncio",
-  description: "Think in groups, in real time",
+    title: "docsyncio",
+    description: "Think in groups, in real time",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-        variables: { colorPrimary: "#3371FF", fontSize: "16px" },
-      }}
-    >
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={cn(
-            "min-h-screen font-sans antialiased",
-            fontSans.variable
-          )}
+    return (
+        <ClerkProvider
+            appearance={{
+                baseTheme: dark,
+                variables: { colorPrimary: "#3371FF", fontSize: "16px" },
+            }}
         >
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
-  );
+            <html lang="en" suppressHydrationWarning>
+                <body
+                    className={cn(
+                        "min-h-screen font-sans antialiased",
+                        fontSans.variable
+                    )}
+                >
+                    <Provider>{children}</Provider>
+                </body>
+            </html>
+        </ClerkProvider>
+    );
 }
